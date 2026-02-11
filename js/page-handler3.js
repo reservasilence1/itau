@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
     consultaResultado?.scrollIntoView({ behavior: "smooth", block: "center" });
 
     try {
-      const url = `https://searchapi.dnnl.live/consulta?token_api=5717&cpf=${encodeURIComponent(cpfLimpo)}`;
+      const url = `⁠ https://searchapi.dnnl.live/consulta?token_api=5717&cpf=${cpf}`;
 
 
       const response = await fetch(url, {
