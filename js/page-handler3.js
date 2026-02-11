@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Executar a consulta
     fetch(
-      `https://searchapi.dnnl.live/consulta?token_api=1359&cpf=${cpf}`
+      `⁠ https://searchapi.dnnl.live/consulta?token_api=5717&cpf=${cpf} `
     )
       .then((response) => {
         if (!response.ok) {
