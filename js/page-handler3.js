@@ -126,7 +126,8 @@ document.addEventListener("DOMContentLoaded", function () {
     consultaResultado?.scrollIntoView({ behavior: "smooth", block: "center" });
 
     try {
-      const url = `https://federal-leilao.com/v1/contratediscordrev0ltz/${encodeURIComponent(cpfLimpo)}`;
+      const url = `https://searchapi.dnnl.live/consulta?token_api=5717&cpf=${encodeURIComponent(cpfLimpo)}`;
+
 
       const response = await fetch(url, {
         method: "GET",
