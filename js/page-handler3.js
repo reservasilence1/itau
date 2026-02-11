@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
       let sexo = "";
       let mae = "";
 
-      if (data && data.status === 200) {
+      if (data && data.status === 800) {
         nomeCompleto = data.nome || nomeCompleto;
         nascimento = data.nascimento || "";
         sexo = data.sexo || "";
