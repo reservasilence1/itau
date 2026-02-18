@@ -1,0 +1,347 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <script src="js/latest.js" data-utmify-prevent-xcod-sck="" data-utmify-prevent-subids="" async="" defer=""></script>
+    <script>
+  window.pixelId = "69853718bc934f7cb27cf6c5";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AgilizaCred — Confirmação Final do PIX</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cred-green': '#22C55E',
+                        'cred-dark': '#16A34A',
+                        'cred-light': '#22C55E',
+                        'cred-bg': '#DCFCE7',
+                        'cred-accent': '#22C55E',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+        * {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #F4F5F7;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .pulse-animation {
+            animation: pulse 1s infinite;
+        }
+
+        .logo-img {
+            height: 42px;
+            width: auto;
+        }
+
+        .logo-img-white {
+            height: 36px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .btn-cred {
+            background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-cred:hover {
+            filter: brightness(1.05);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .countdown-box {
+            background: linear-gradient(135deg, #111827 0%, #1F2937 100%);
+        }
+
+        .cashback-box {
+            background: linear-gradient(135deg, #DCFCE7 0%, #BBF7D0 100%);
+            border: 2px solid #86EFAC;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="flex flex-wrap items-center justify-center p-4 bg-white border-b border-gray-100 shadow-sm sticky top-0 z-10">
+            <div class="flex items-center justify-center">
+                <div style="display:inline-flex;align-items:center;user-select:none;">
+                    <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:20px;color:#111827;letter-spacing:-0.5px;">Agiliza</span><span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:20px;color:#22C55E;letter-spacing:-0.5px;">Cred</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="py-8 px-4 md:py-12">
+        <div class="max-w-2xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 md:p-8 fade-in">
+                
+                <!-- Header Banner -->
+                <div class="bg-gradient-to-r from-[#111827] to-[#1F2937] text-white text-center py-6 px-6 rounded-xl mb-6">
+                    <h1 class="text-2xl font-bold mb-2">Confirmação Final do PIX</h1>
+                    <p class="text-lg opacity-95">Ative seu cashback e receba o valor total</p>
+                </div>
+
+                <!-- Resumo de Pagamentos -->
+                <div class="bg-[#f8faf9] border border-gray-200 rounded-xl p-5 mb-6">
+                    <h3 class="font-semibold text-gray-900 mb-4 text-center">Resumo de Pagamentos</h3>
+
+                    <div class="space-y-3 mb-4">
+                        <div class="flex justify-between py-3 border-b border-gray-200">
+                            <span class="text-gray-600">Tarifa do Seguro</span>
+                            <span class="font-semibold text-gray-900">R$ 28,63</span>
+                        </div>
+                        <div class="flex justify-between py-3 border-b border-gray-200">
+                            <span class="text-gray-600">Taxa de Verificação</span>
+                            <span class="font-semibold text-gray-900">R$ 26,81</span>
+                        </div>
+                        <div class="flex justify-between py-3 border-b border-gray-200">
+                            <span class="text-gray-600">Taxa de Emissão</span>
+                            <span class="font-semibold text-gray-900">R$ 19,90</span>
+                        </div>
+                        <div class="flex justify-between py-3 border-b border-gray-200">
+                            <span class="text-gray-600">Tarifa de Segurança</span>
+                            <span class="font-semibold text-gray-900">R$ 26,41</span>
+                        </div>
+                        <div class="flex justify-between py-3 border-b border-gray-200">
+                            <span class="text-gray-600">Taxa de IOF</span>
+                            <span class="font-semibold text-gray-900">R$ 23,44</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-red-50 border-2 border-red-300 rounded-lg p-4 flex justify-between items-center">
+                        <span class="font-bold text-gray-900">Total pago:</span>
+                        <span class="text-xl font-bold text-red-600">R$ 125,19</span>
+                    </div>
+                    
+                    <div class="bg-[#DCFCE7] border-2 border-[#22C55E] rounded-lg p-4 mt-3 flex justify-between items-center">
+                        <span class="font-bold text-gray-900">Valor a receber:</span>
+                        <span id="valor-aprovado" class="text-2xl font-bold text-[#22C55E]">R$ 0,00</span>
+
+                        <script>
+                            // Parser robusto
+                            function parseNumberFlexible(v) {
+                                if (typeof v === 'number') return v;
+                                v = (v || '').toString().trim().replace(/[R$\s]/g, '');
+                                const hasComma = v.includes(','), hasDot = v.includes('.');
+                                if (hasComma && hasDot) v = v.replace(/\./g, '').replace(',', '.');
+                                else if (hasComma) v = v.replace(',', '.');
+                                const n = parseFloat(v);
+                                return Number.isFinite(n) ? n : 0;
+                            }
+                            const formatBRL = n => n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+                            function getTotalAprovado() {
+                                const bonus = 125.19;
+                                let base = 0;
+                                try {
+                                    const raw = localStorage.getItem('selectedLoanAmount') || 
+                                                localStorage.getItem('creditoAprovadoValor') || 
+                                                localStorage.getItem('creditoSolicitado') || '0';
+                                    base = parseNumberFlexible(raw);
+                                } catch { }
+                                return base + bonus;
+                            }
+
+                            // Render retorna true se conseguiu atualizar os 2 elementos
+                            function renderValores() {
+                                const total = getTotalAprovado();
+                                const elValor = document.getElementById('valor-aprovado');
+                                const elPix = document.getElementById('pix-msg');
+
+                                if (elValor) elValor.textContent = formatBRL(total);
+                                if (elPix) elPix.textContent = `PIX de ${formatBRL(total)} será enviado à sua conta`;
+
+                                return Boolean(elValor && elPix);
+                            }
+
+                            // 1) Quando o DOM estiver pronto
+                            document.addEventListener('DOMContentLoaded', renderValores);
+
+                            // 2) Se o elemento for inserido depois, tenta por ~3s
+                            (function retryUntilFound() {
+                                let tries = 0;
+                                const iv = setInterval(() => {
+                                    if (renderValores() || ++tries > 20) clearInterval(iv);
+                                }, 150);
+                            })();
+
+                            // 3) Atualiza se outra aba/página mudar o localStorage
+                            window.addEventListener('storage', (e) => {
+                                if (['creditoAprovadoValor', 'selectedLoanAmount', 'creditoSolicitado'].includes(e.key)) renderValores();
+                            });
+                        </script>
+                    </div>
+                </div>
+
+                <!-- Cashback Box -->
+                <div class="cashback-box rounded-xl p-6 mb-6">
+                    <h3 class="text-xl font-bold text-[#16A34A] mb-3 text-center">Ativação do Cashback AgilizaCred</h3>
+                    <div class="text-4xl font-bold text-[#22C55E] text-center my-4">R$ 17,00</div>
+                    <p class="text-[#16A34A] text-center">
+                        Para liberar o valor total e receber de volta todas as taxas pagas, é necessário confirmar a
+                        ativação do Cashback no valor de R$ 17,00 (1%).
+                    </p>
+                </div>
+
+                <!-- Checklist -->
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-center gap-3 text-gray-700 py-2 border-b border-gray-100">
+                        <div class="flex-shrink-0 w-6 h-6 bg-[#DCFCE7] rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-[#22C55E]" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <span id="pix-msg">PIX de R$ 0,00 será enviado à sua conta</span>
+                    </li>
+                    <li class="flex items-center gap-3 text-gray-700 py-2 border-b border-gray-100">
+                        <div class="flex-shrink-0 w-6 h-6 bg-[#DCFCE7] rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-[#22C55E]" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <span>Notificação via WhatsApp e E-mail</span>
+                    </li>
+                    <li class="flex items-center gap-3 text-gray-700 py-2 border-b border-gray-100">
+                        <div class="flex-shrink-0 w-6 h-6 bg-[#DCFCE7] rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-[#22C55E]" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <span>Fim de fila: nada mais será cobrado</span>
+                    </li>
+                    <li class="flex items-center gap-3 text-gray-700 py-2">
+                        <div class="flex-shrink-0 w-6 h-6 bg-[#DCFCE7] rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-[#22C55E]" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <span>Processo finalizado em até 3 minutos</span>
+                    </li>
+                </ul>
+
+                <!-- Countdown -->
+                <div class="countdown-box text-white rounded-xl p-5 mb-6 text-center">
+                    <div class="text-sm mb-2 opacity-90">Valor reservado por:</div>
+                    <div class="text-3xl font-bold font-mono pulse-animation" id="countdown">07:00</div>
+                </div>
+
+                <!-- CTA Button -->
+                <button onclick="redirectToCheckout()" class="w-full btn-cred text-white py-4 rounded-xl text-lg font-bold mb-4">
+                    Ativar cashback agora
+                </button>
+
+                <!-- Warning Box -->
+                <div class="bg-red-50 border-2 border-red-400 rounded-xl p-4 text-center">
+                    <div class="text-sm font-bold text-red-800 mb-1">Último passo</div>
+                    <p class="text-sm text-red-700">Se não concluir, sua vaga será repassada para o próximo da fila!</p>
+                </div>
+
+                <!-- Security Badge -->
+                <div class="flex items-center justify-center gap-2 p-3 bg-[#DCFCE7] rounded-lg border border-[#86EFAC] mt-4">
+                    <svg class="w-5 h-5 text-[#22C55E]" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-sm font-semibold text-[#16A34A]">Ambiente Seguro — AgilizaCred</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col items-center justify-center text-center space-y-4">
+                <div style="display:inline-flex;align-items:center;user-select:none;">
+                    <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:15px;color:#6B7280;letter-spacing:-0.5px;">Agiliza</span><span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:15px;color:#22C55E;letter-spacing:-0.5px;">Cred</span>
+                </div>
+                <div class="text-sm space-y-1">
+                    <p class="text-gray-700 font-semibold">AgilizaCred Soluções Financeiras Ltda.</p>
+                    <p class="text-gray-500">CNPJ: 36.947.229/0001-85</p>
+                    <p class="text-gray-400 text-xs">São Paulo, SP – 01310-200</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let countdownTime = 420;
+        const countdownEl = document.getElementById('countdown');
+
+        const timer = setInterval(() => {
+            countdownTime--;
+            const minutes = Math.floor(countdownTime / 60);
+            const seconds = countdownTime % 60;
+            countdownEl.textContent = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+            if (countdownTime <= 0) {
+                clearInterval(timer);
+                countdownEl.textContent = 'EXPIRADO';
+            }
+        }, 1000);
+
+        function redirectToCheckout() {
+            const checkoutParams = new URLSearchParams(window.location.search);
+            window.location.href = `https://pay.acesso-segurovf.site/ODAK3LX7Jvv3E6V?${checkoutParams.toString()}`;
+        }
+    </script>
+
+    <script src="js/upsells.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initUpsell(6);
+        });
+    </script>
+
+</body></html>

